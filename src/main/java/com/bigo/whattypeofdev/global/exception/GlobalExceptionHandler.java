@@ -12,30 +12,26 @@ import org.springframework.web.servlet.NoHandlerFoundException;
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
+    /*
+    * @Validated로 binding error 발생할때.
+    * */
     @ExceptionHandler(value = MethodArgumentNotValidException.class)
-    public ResponseEntity methodArgumentNotValid(MethodArgumentNotValidException e) {
-        ErrorResponse errorResponse = new ErrorResponse();
-        errorResponse.setStatus(ErrorStatusEnum.BAD_REQUEST);
-        errorResponse.setMessage(e.getClass().getName());
+    public ResponseEntity<ErrorResponse> methodArgumentNotValid(MethodArgumentNotValidException e) {
+        ErrorResponse errorResponse = ErrorResponse.of(ErrorStatusEnum.BAD_REQUEST,e.getMessage());
         return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(value = NoHandlerFoundException.class)
     public ResponseEntity noHandlerFoundException(NoHandlerFoundException e) {
-        ErrorResponse errorResponse = new ErrorResponse();
-        errorResponse.setStatus(ErrorStatusEnum.BAD_REQUEST);
-        errorResponse.setMessage(e.getClass().getName());
-        errorResponse.setData("핸들러 없음");
+        ErrorResponse errorResponse = ErrorResponse.of(ErrorStatusEnum.BAD_REQUEST,e.getClass().getName());
         return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
     }
 
 
     @ExceptionHandler(value = CustomException.class)
     public ResponseEntity customException(CustomException e) {
-        ErrorResponse errorResponse = new ErrorResponse();
         ErrorStatusEnum errorStatusEnum = e.getErrorStatusEnum();
-        errorResponse.setStatus(errorStatusEnum);
-        errorResponse.setMessage(e.getMessage());
+        ErrorResponse errorResponse = ErrorResponse.of(e.getErrorStatusEnum(),e.getMessage());
         return new ResponseEntity<>(errorResponse, HttpStatus.valueOf(errorStatusEnum.getCode()));
     }
 

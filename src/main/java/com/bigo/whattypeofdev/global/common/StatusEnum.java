@@ -1,5 +1,8 @@
 package com.bigo.whattypeofdev.global.common;
 
+import lombok.Getter;
+
+@Getter
 public enum StatusEnum {
     OK(200,"OK");
 

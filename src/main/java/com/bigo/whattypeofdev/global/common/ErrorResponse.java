@@ -1,17 +1,16 @@
 package com.bigo.whattypeofdev.global.common;
 
-import lombok.Data;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 
-@Data
+@Getter
+@AllArgsConstructor
 public class ErrorResponse {
     private ErrorStatusEnum status;
     private String message;
-    private Object data;
 
-    public ErrorResponse(){
-        this.status = null;
-        this.data = null;
-        this.message = null;
+    public static ErrorResponse of(ErrorStatusEnum status, String message) {
+        return new ErrorResponse(status, message);
     }
 
 }
