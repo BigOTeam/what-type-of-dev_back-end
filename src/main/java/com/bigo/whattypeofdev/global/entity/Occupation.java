@@ -7,11 +7,11 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public enum Occupation {
     Websites("WebDeveloper",""),
-    Database("DB개발자",""),
+    Database("","DB개발자"),
     ItInfrastructure("",""),
-    DataScientist("데이터사이언티스트",""),
-    Finance("금융개발자?",""),
-    Game("게임개발자",""),
+    DataScientist("","데이터사이언티스트"),
+    Finance("","금융개발자?"),
+    Game("","게임개발자"),
     Entertainment("",""),
     SystemSoftware("","");
 

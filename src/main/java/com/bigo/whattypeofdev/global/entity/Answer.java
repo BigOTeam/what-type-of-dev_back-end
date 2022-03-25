@@ -3,6 +3,7 @@ package com.bigo.whattypeofdev.global.entity;
 import javax.persistence.*;
 
 @Entity
+@Table(name="tb_job")
 public class Answer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

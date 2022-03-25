@@ -3,6 +3,7 @@ package com.bigo.whattypeofdev.global.entity;
 import javax.persistence.*;
 
 @Entity
+@Table(name="tb_job")
 public class Job {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,5 +18,5 @@ public class Job {
     private String jobDescription;
 
     @Column(name="job_img",length = 1000)
-    private String jobImageUrl;
+    private String jobImg;
 }

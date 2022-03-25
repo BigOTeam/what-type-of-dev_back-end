@@ -3,10 +3,11 @@ package com.bigo.whattypeofdev.global.entity;
 import javax.persistence.*;
 
 @Entity
+@Table(name="tb_question")
 public class Question {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long questionId;
 
     @Column(name="question",length = 500)

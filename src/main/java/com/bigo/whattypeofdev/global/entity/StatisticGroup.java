@@ -3,6 +3,7 @@ package com.bigo.whattypeofdev.global.entity;
 import javax.persistence.*;
 
 @Entity
+@Table(name="tb_statistic_group")
 public class StatisticGroup {
 
     @Id
@@ -14,5 +15,5 @@ public class StatisticGroup {
     private String statisticName;
 
     @Column(name="statistic_img",length = 1000)
-    private String statisticImage;
+    private String statisticImg;
 }

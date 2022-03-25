@@ -3,6 +3,7 @@ package com.bigo.whattypeofdev.global.entity;
 import javax.persistence.*;
 
 @Entity
+@Table(name="tb_page")
 public class Page {
 
     @Id
