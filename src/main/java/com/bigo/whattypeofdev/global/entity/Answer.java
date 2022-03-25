@@ -16,9 +16,10 @@ public class Answer {
     @Column(name="answer_seq")
     private int answerSeq;
 
-    @ManyToOne()
+    @ManyToOne
     @JoinColumn(name="question_id")
     private Question question;
+
 
 
 }

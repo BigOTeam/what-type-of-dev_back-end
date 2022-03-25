@@ -1,6 +1,7 @@
 package com.bigo.whattypeofdev.global.entity;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name="tb_question")
@@ -27,5 +28,8 @@ public class Question {
     @ManyToOne
     @JoinColumn(name="statistic_id")
     private StatisticGroup statisticGroup;
+
+    @OneToMany(mappedBy = "answer")
+    private List<Answer> answerList;
 
 }

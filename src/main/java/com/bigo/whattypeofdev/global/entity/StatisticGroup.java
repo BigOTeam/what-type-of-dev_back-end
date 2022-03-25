@@ -1,6 +1,7 @@
 package com.bigo.whattypeofdev.global.entity;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name="tb_statistic_group")
@@ -16,4 +17,7 @@ public class StatisticGroup {
 
     @Column(name="statistic_img",length = 1000)
     private String statisticImg;
+
+    @OneToMany(mappedBy = "question")
+    private List<Question> questionList;
 }

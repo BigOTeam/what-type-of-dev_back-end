@@ -1,6 +1,7 @@
 package com.bigo.whattypeofdev.global.entity;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name="tb_page")
@@ -17,9 +18,11 @@ public class Page {
     private String pageDescription;
 
     @Column(name="page_img",length = 1000)
-    private String ImageUrl;
+    private String pageImg;
 
     @Column(name="page_no",length = 1000)
     private String pageNo;
 
+    @OneToMany(mappedBy="question")
+    private List<Question> questionList;
 }
