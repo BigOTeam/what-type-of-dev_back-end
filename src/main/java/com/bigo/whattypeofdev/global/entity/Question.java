@@ -28,7 +28,7 @@ public class Question {
     @JoinColumn(name="statistic_id")
     private StatisticGroup statisticGroup;
 
-    @OneToMany(mappedBy = "answer")
-    private List<Answer> answerList;
+    @OneToMany(mappedBy = "questionanswer")
+    private List<QuestionAnswer> questionAnswerList;
 
 }

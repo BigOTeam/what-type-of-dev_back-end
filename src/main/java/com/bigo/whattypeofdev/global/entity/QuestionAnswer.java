@@ -12,11 +12,10 @@ public class QuestionAnswer {
     private Long questionAnswerId;
 
     @ManyToOne
-    @JoinColumn(name="question_id")
+    @Column(name="question_id")
     private Question question;
 
-    @OneToMany(mappedBy = "Answer")
-    private List<Answer> answerList;
-
-
+    @ManyToOne
+    @Column(name="answer_id")
+    private Answer answer;
 }
