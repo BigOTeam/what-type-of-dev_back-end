@@ -12,6 +12,7 @@ public class Answer {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="answer_id")
     private Long answerId;
 
     @Column(name="answer_seq")
