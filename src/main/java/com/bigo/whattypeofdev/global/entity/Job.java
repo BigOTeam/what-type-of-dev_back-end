@@ -1,7 +1,10 @@
 package com.bigo.whattypeofdev.global.entity;
 
+import lombok.Getter;
+
 import javax.persistence.*;
 
+@Getter
 @Entity
 @Table(name="tb_job")
 public class Job {

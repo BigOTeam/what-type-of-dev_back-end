@@ -1,8 +1,10 @@
 package com.bigo.whattypeofdev.global.entity;
 
-import javax.persistence.*;
-import java.util.List;
+import lombok.Getter;
 
+import javax.persistence.*;
+
+@Getter
 @Entity
 @Table(name="tb_question_answer")
 public class QuestionAnswer {
