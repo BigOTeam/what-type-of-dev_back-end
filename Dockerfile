@@ -6,6 +6,6 @@ WORKDIR $APP_HOME
 
 COPY build/libs/*.jar application.jar
 
-EXPOSE 8000
+EXPOSE 8081
 
 CMD ["java", "-jar", "application.jar"]
