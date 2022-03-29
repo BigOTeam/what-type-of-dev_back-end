@@ -20,7 +20,6 @@ public class Question {
     @Column(name="chart_type",length=100)
     private String chartType;
 
-
     @ManyToOne
     @JoinColumn(name="page_id")
     private Page page;
