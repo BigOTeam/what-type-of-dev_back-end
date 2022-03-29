@@ -5,14 +5,16 @@ import lombok.Getter;
 @Getter
 public enum ErrorStatusEnum {
 
-    BAD_REQUEST(400,"BAD REQUEST"),
-    INTERNAL_SERVER_ERROR(500,"INTERNAL SERVER ERROR");
+    BAD_REQUEST("BAD_REQUEST","BAD REQUEST",400),
+    INTERNAL_SERVER_ERROR("INTERNAL_SERVER_ERROR","INTERNAL SERVER ERROR",500);
 
-    int code;
+    String code;
     String message;
+    int status;
 
-    ErrorStatusEnum(int code, String message) {
+    ErrorStatusEnum(String code, String message,int status) {
         this.code = code;
         this.message = message;
+        this.status = status;
     }
 }
