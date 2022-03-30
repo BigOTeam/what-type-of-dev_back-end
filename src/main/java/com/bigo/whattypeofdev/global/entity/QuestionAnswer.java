@@ -14,10 +14,10 @@ public class QuestionAnswer {
     private Long questionAnswerId;
 
     @ManyToOne
-    @Column(name="question_id")
+    @JoinColumn(name="question_id")
     private Question question;
 
     @ManyToOne
-    @Column(name="answer_id")
+    @JoinColumn(name="answer_id")
     private Answer answer;
 }

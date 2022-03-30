@@ -32,7 +32,7 @@ public class Question {
     @JoinColumn(name="statistic_id")
     private StatisticGroup statisticGroup;
 
-    @OneToMany(mappedBy = "questionanswer")
+    @OneToMany(mappedBy = "question")
     private List<QuestionAnswer> questionAnswerList;
 
 }

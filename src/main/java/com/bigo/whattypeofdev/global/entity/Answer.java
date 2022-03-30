@@ -21,7 +21,7 @@ public class Answer {
     @Column(name="answer",length=500)
     private String answer;
 
-    @OneToMany(mappedBy = "questionanswer")
+    @OneToMany(mappedBy = "answer")
     private List<QuestionAnswer> questionAnswerList;
 
 }

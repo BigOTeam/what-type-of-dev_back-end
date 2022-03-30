@@ -20,6 +20,6 @@ public class StatisticGroup {
     @Column(name="statistic_img",length = 1000)
     private String statisticImg;
 
-    @OneToMany(mappedBy = "question")
+    @OneToMany(mappedBy = "statisticGroup")
     private List<Question> questionList;
 }
