@@ -1,12 +1,13 @@
 package com.bigo.whattypeofdev.global.entity;
 
-import lombok.Getter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
 @Getter
+@NoArgsConstructor(access=AccessLevel.PROTECTED)
 @Table(name="tb_answer")
 public class Answer {
 
@@ -24,4 +25,9 @@ public class Answer {
     @OneToMany(mappedBy = "answer")
     private List<QuestionAnswer> questionAnswerList;
 
+    @Builder
+    public Answer(int answerSeq,String answer) {
+        this.answerSeq = answerSeq;
+        this.answer = answer;
+    }
 }

@@ -1,11 +1,14 @@
 package com.bigo.whattypeofdev.global.entity;
 
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
 @Getter
 @Entity
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Table(name="tb_question_answer")
 public class QuestionAnswer {
     @Id
@@ -20,4 +23,5 @@ public class QuestionAnswer {
     @ManyToOne
     @JoinColumn(name="answer_id")
     private Answer answer;
+
 }

@@ -1,12 +1,13 @@
 package com.bigo.whattypeofdev.global.entity;
 
-import lombok.Getter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.List;
 
 @Getter
 @Entity
+@NoArgsConstructor(access= AccessLevel.PROTECTED)
 @Table(name="tb_question")
 public class Question {
 
@@ -16,9 +17,11 @@ public class Question {
     private Long questionId;
 
     @Column(name="question",length = 500)
+    @NonNull
     private String question;
 
     @Column(name="question_initial",length=100)
+    @NonNull
     private String questionInitial;
 
     @Column(name="chart_type",length=100)
@@ -34,5 +37,15 @@ public class Question {
 
     @OneToMany(mappedBy = "question")
     private List<QuestionAnswer> questionAnswerList;
+
+    @Builder
+    public Question(String question,String questionInitial,String chartType){
+        if(question==null||questionInitial==null){
+            throw new IllegalArgumentException("question 필수 파라미터 누락");
+        }
+        this.question = question;
+        this.questionInitial = questionInitial;
+        this.chartType = chartType;
+    }
 
 }
