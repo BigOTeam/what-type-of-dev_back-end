@@ -17,11 +17,9 @@ public class Question {
     private Long questionId;
 
     @Column(name="question",length = 500)
-    @NonNull
     private String question;
 
     @Column(name="question_initial",length=100)
-    @NonNull
     private String questionInitial;
 
     @Column(name="chart_type",length=100)
