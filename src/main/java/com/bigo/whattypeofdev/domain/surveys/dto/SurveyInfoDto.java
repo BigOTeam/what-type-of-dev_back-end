@@ -1,8 +1,5 @@
 package com.bigo.whattypeofdev.domain.surveys.dto;
 
-import com.bigo.whattypeofdev.global.entity.Answer;
-import com.bigo.whattypeofdev.global.entity.Question;
-import com.bigo.whattypeofdev.global.entity.QuestionAnswer;
 import lombok.Builder;
 import lombok.Getter;
 
