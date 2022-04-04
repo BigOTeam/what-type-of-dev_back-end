@@ -25,7 +25,7 @@ services:
       - '8081:8081'
     depends_on:
       - db
-    container_name: bigo_app
+    container_name: bigo_backend
     environment:
       SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/bigo_db?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Seoul&zeroDateTimeBehavior=convertToNull&rewriteBatchedStatements=true
     networks:
@@ -40,6 +40,19 @@ services:
     volumes:
       - ./jenkins_volumes/jenkins:/var/jenkins_home
       - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      TZ: Asia/Seoul
+    networks:
+      - bigo_network
+
+  nginx:
+    container_name: bigo_nginx
+    image: nginx
+    ports:
+      - 80:80
+    volumes:
+      - ./nginx_volumes/nginx:/etc/nginx/conf.d/
+      - ./nginx_volumes/log:/var/log/nginx
     environment:
       TZ: Asia/Seoul
     networks:
