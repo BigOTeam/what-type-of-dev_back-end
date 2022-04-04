@@ -25,9 +25,4 @@ public class StatisticsContentDto {
         this.result = result;
     }
 
-    private static StatisticsContentDto of(StatisticGroup statisticGroup,String description,List<String> summaryInfo,List<StatisticsResultDto> result){
-
-        
-    }
-
 }
