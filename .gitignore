@@ -15,6 +15,7 @@ db_volumes/data
 *.iws
 *.iml
 *.ipr
+*.yml
 out/
 !**/src/main/**/out/
 !**/src/test/**/out/
