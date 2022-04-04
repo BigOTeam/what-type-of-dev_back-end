@@ -14,6 +14,7 @@ db_volumes/data
 .idea
 *.iws
 *.iml
+*.yml
 *.ipr
 out/
 !**/src/main/**/out/
