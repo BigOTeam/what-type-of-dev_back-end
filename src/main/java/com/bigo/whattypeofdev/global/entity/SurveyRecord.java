@@ -103,38 +103,55 @@ public class SurveyRecord {
 
     @Column(name = "life_good")
     private int lifeGood;
+
     @Column(name = "life_job")
     private int lifeJob;
+
     @Column(name = "life_fun")
     private int lifeFun;
+
     @Column(name = "life_safe")
     private int lifeSafe;
+
     @Column(name = "life_givefun")
     private int lifeGivefun;
+
     @Column(name = "adventure_creative")
     private int adventureCreative;
+
     @Column(name = "adventure_idea")
     private int adventureIdea;
+
     @Column(name = "adventure_fun")
     private int adventureFun;
+
     @Column(name = "job_website")
     private int jobWebsite;
+
     @Column(name = "job_database")
     private int jobDatabase;
+
     @Column(name = "job_it_infrastructure")
     private int jobItInfrastructure;
+
     @Column(name = "job_data_science")
     private int jobDataScience;
+
     @Column(name = "job_games")
     private int jobGames;
+
     @Column(name = "job_finance")
     private int jobFinance;
+
     @Column(name = "job_utilities")
     private int jobUtilities;
+
     @Column(name = "job_programming_tools")
     private int jobProgrammingTools;
+
     @Column(name = "job_entertainment")
     private int jobEntertainment;
+
     @Column(name = "job_system_software")
     private int jobSystemSoftware;
 
