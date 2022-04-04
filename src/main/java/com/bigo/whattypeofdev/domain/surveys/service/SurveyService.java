@@ -21,7 +21,7 @@ public class SurveyService {
     private final JobRepository jobRepository;
 
     public SurveyResponseDto getSurveybyPageNo(Long pageNo,String isDeveloper){
-        Page page = surveyRepository.findById(pageNo).orElseThrow(()-> new SurveyNotFoundException("pageNo에 해당하는 Survey를 찾을 수 없습니다."));
+        Page page = surveyRepository.findById(pageNo).orElseThrow(()-> new SurveyNotFoundException("pageNo에 해당하는 Survey 데이터를 찾을 수 없습니다."));
         List<SurveyInfoDto> surveyInfoDtos = page.getQuestionList().stream().map(o->
                                                     SurveyInfoDto.builder()
                                                             .questionInitial(o.getQuestionInitial())
