@@ -14,15 +14,15 @@ public class JobResponseDto {
     @ApiModelProperty(name="직업 이름", example = "웹개발자")
     private String jobName;
     @ApiModelProperty(name="직업 이미지", example = "https://~")
-    private String jobImgUrl;
+    private String jobImg;
     @ApiModelProperty(name="직업 설명")
     private String jobDescription;
 
     @Builder
-    public JobResponseDto(Long jobId, String jobName, String jobImgUrl, String jobDescription) {
+    public JobResponseDto(Long jobId, String jobName, String jobImg, String jobDescription) {
         this.jobId = jobId;
         this.jobName = jobName;
-        this.jobImgUrl = jobImgUrl;
+        this.jobImg = jobImg;
         this.jobDescription = jobDescription;
     }
 
@@ -30,7 +30,7 @@ public class JobResponseDto {
         return JobResponseDto.builder()
                 .jobId(job.getJobId())
                 .jobName(job.getJobName().getJobName())
-                .jobImgUrl(job.getJobImg())
+                .jobImg(job.getJobImg())
                 .jobDescription(job.getJobDescription())
                 .build();
     }

@@ -18,15 +18,15 @@ public class SurveyResponseDto {
     @ApiModelProperty(name="설문그룹 설명", example = "당신에 대해서 알려주세요!")
     private String pageDescription;
     @ApiModelProperty(name="그룹 이미지", example = "https://~")
-    private String pageImageUrl;
+    private String pageImg;
     private List<SurveyInfoDto> surveys;
 
     @Builder
-    public SurveyResponseDto(int pageNo, String pageName, String pageDescription, String pageImageUrl, List<SurveyInfoDto> surveys) {
+    public SurveyResponseDto(int pageNo, String pageName, String pageDescription, String pageImg, List<SurveyInfoDto> surveys) {
         this.pageNo = pageNo;
         this.pageName = pageName;
         this.pageDescription = pageDescription;
-        this.pageImageUrl = pageImageUrl;
+        this.pageImg = pageImg;
         this.surveys = surveys;
 
     }
@@ -36,7 +36,7 @@ public class SurveyResponseDto {
                 .pageNo(page.getPageNo())
                 .pageName(page.getPageName())
                 .pageDescription(page.getPageDescription())
-                .pageImageUrl(page.getPageImg())
+                .pageImg(page.getPageImg())
                 .surveys(surveys)
                 .build();
         return surveyResponseDto;
