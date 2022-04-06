@@ -30,8 +30,6 @@ public class StatisticsService {
 
     public StatisticsHeaderDto getStatisticsHeader(){
         int userCount = getSurveyRecordCount();
-        //개발자 묻는 질문 답변 받기
-        //답변 예 : 1 아니오 : 2
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
         String date = LocalDateTime.now().format(formatter);
         int careerCount = (int)surveyRecordRepository.countByAboutmeDev(1);
@@ -106,16 +104,6 @@ public class StatisticsService {
         int answerSeqAge=-1;
         if (!gender.equals("전체")) answerSeqGender = answerRepository.findByAnswer(gender).getAnswerSeq();
         if(!age.equals("전체")) answerSeqAge = answerRepository.findByAnswer(age).getAnswerSeq();
-//        try {
-//            if (!gender.equals("전체")) answerSeqGender = answerRepository.findByAnswer(gender).getAnswerSeq();
-//        }catch(NullPointerException e){
-//            throw new NullPointerException("parameter가 잘못됨");
-//        }
-//        try{
-//            if(!age.equals("전체")) answerSeqGender = answerRepository.findByAnswer(gender).getAnswerSeq();
-//        }catch(NullPointerException e){
-//            throw new NullPointerException("");
-//        }
         return  StatisticsResultChartInfoDto.converter(surveyRecordRepository.findAllTopByColumnWithFilter("aboutme_dev_type",answerSeqGender,answerSeqAge),surveyRecordRepository.findAllTopcountByColumnWithFilter("aboutme_dev_type",answerSeqGender,answerSeqAge),1);
     }
 }
