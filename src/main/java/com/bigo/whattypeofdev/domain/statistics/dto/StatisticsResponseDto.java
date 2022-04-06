@@ -1,5 +1,7 @@
 package com.bigo.whattypeofdev.domain.statistics.dto;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -7,9 +9,12 @@ import lombok.NoArgsConstructor;
 import java.util.List;
 
 @Getter
+@ApiModel
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class StatisticsResponseDto {
+    @ApiModelProperty(name = "통계 헤더 Dto")
     private StatisticsHeaderDto header;
+    @ApiModelProperty(name = "통계 내용 Dto")
     private List<StatisticsContentDto> contents;
 
 
