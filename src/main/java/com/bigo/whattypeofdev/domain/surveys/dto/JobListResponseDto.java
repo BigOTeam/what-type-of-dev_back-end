@@ -7,10 +7,17 @@ import lombok.RequiredArgsConstructor;
 
 import java.util.List;
 
-@RequiredArgsConstructor
 @Getter
 @ApiModel
 public class JobListResponseDto {
     @ApiModelProperty(name="직업 목록")
-    private final List<JobDto> jobList;
+    private List<JobDto> jobList;
+
+    private JobListResponseDto(List<JobDto> jobList) {
+        this.jobList = jobList;
+    }
+
+    public static JobListResponseDto from(List<JobDto> jobList){
+        return new JobListResponseDto(jobList);
+    }
 }
