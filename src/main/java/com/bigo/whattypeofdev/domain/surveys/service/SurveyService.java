@@ -29,7 +29,7 @@ public class SurveyService {
                                                             .answers(o.getQuestionAnswerList().stream().map(AnswerDto::fromEntity).collect(Collectors.toList()))
                                                             .build())
                                                     .collect(Collectors.toList());
-        if(pageNo==2&&!isDeveloper.equals("true")){
+        if(pageNo==2&&isDeveloper!=null&&!isDeveloper.equals("true")){
             surveyInfoDtos.remove(0);
         }
         return SurveyResponseDto.fromEntitywithSurveyInfoDto(page,surveyInfoDtos);
