@@ -1,13 +1,9 @@
 package com.bigo.whattypeofdev.domain.statistics.dto;
 
-import com.bigo.whattypeofdev.global.entity.Answer;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -25,14 +21,14 @@ public class StatisticsResultChartInfoDto {
         this.countPercent = countPercent;
     }
 
-    public static StatisticsResultChartInfoDto converter(List<String> data,List<Integer> count){
+    public static StatisticsResultChartInfoDto converter(List<String> data,List<Integer> count,int totalcount){
         return StatisticsResultChartInfoDto
                 .builder()
                 .contents(data)
                 .count(count)
-                .count(count
+                .countPercent(count
                         .stream()
-                        .map(c->c/count.stream().mapToInt(i->i).sum())
+                        .map(c->(c*100/totalcount))
                         .collect(Collectors.toList()))
                 .build();
     }

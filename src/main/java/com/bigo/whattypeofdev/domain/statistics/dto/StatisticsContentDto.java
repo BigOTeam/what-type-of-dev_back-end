@@ -34,7 +34,7 @@ public class StatisticsContentDto {
                 .groupId(statisticGroup.getStatisticId())
                 .groupName(statisticGroup.getStatisticName())
                 .groupImg(statisticGroup.getStatisticImg())
-                .summaryInfos(totalDescription.subList(1,3))
+                .summaryInfos(totalDescription.subList(1,4))
                 .description(totalDescription.get(0))
                 .results(results)
                 .build();
