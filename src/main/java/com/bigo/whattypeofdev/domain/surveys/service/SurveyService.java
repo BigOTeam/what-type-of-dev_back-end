@@ -37,7 +37,7 @@ public class SurveyService {
 
     public JobListResponseDto getJobList(){
         List<JobDto> jobs = jobRepository.findAll().stream().map(JobDto::fromEntity).collect(Collectors.toList());
-        return new JobListResponseDto(jobs);
+        return JobListResponseDto.from(jobs);
     }
 
     public JobResponseDto getJobInfo(Long jobId) {
