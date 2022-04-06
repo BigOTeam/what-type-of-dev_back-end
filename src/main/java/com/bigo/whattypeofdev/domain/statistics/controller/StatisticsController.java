@@ -2,6 +2,7 @@ package com.bigo.whattypeofdev.domain.statistics.controller;
 
 import com.bigo.whattypeofdev.domain.statistics.dto.StatisticsResponseDto;
 import com.bigo.whattypeofdev.domain.statistics.dto.StatisticsResultChartInfoDto;
+import com.bigo.whattypeofdev.domain.statistics.dto.StatisticsUserCountDto;
 import com.bigo.whattypeofdev.domain.statistics.service.StatisticsService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -13,14 +14,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-<<<<<<< HEAD
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
 
-=======
 @Api(value = "통계 API", tags = {"Statistics"})
->>>>>>> 7db279005b5b920dd37c7c228e73428e879534c6
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("api/v1")
@@ -51,22 +48,17 @@ public class StatisticsController {
                 return statisticsService.getStatisticswithFilter(gender,age);
         }
 
-        @GetMapping("statistics/count")
-<<<<<<< HEAD
-        public  Map<String,Integer> getUserCount(){
-                Map<String,Integer> statisticsUserCount = new HashMap<>();
-                int responseUserCount = statisticsService.getSurveyRecordCount();
-                statisticsUserCount.put("responseUserCount",responseUserCount);
-                return statisticsUserCount;
-=======
         @ApiOperation(value = "전체 응답자 수")
         @ApiResponses({
                 @ApiResponse(code = 200, message = "성공"),
                 @ApiResponse(code = 400, message = "파라미터에 해당하는 데이터를 찾을 수 없음"),
                 @ApiResponse(code = 500, message = "서버 오류")
         })
-        public StatisticsUserCountDto getUserCount(){
-                return statisticsService.getStatisticsUserCount();
->>>>>>> 7db279005b5b920dd37c7c228e73428e879534c6
+        @GetMapping("statistics/count")
+        public  Map<String,Integer> getUserCount() {
+                Map<String, Integer> statisticsUserCount = new HashMap<>();
+                int responseUserCount = statisticsService.getSurveyRecordCount();
+                statisticsUserCount.put("responseUserCount", responseUserCount);
+                return statisticsUserCount;
         }
 }
