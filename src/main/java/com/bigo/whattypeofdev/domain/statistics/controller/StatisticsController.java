@@ -2,13 +2,16 @@ package com.bigo.whattypeofdev.domain.statistics.controller;
 
 import com.bigo.whattypeofdev.domain.statistics.dto.StatisticsResponseDto;
 import com.bigo.whattypeofdev.domain.statistics.dto.StatisticsResultChartInfoDto;
-import com.bigo.whattypeofdev.domain.statistics.dto.StatisticsUserCountDto;
 import com.bigo.whattypeofdev.domain.statistics.service.StatisticsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
 
 @RestController
 @RequiredArgsConstructor
@@ -29,7 +32,10 @@ public class StatisticsController {
         }
 
         @GetMapping("statistics/count")
-        public StatisticsUserCountDto getUserCount(){
-                return statisticsService.getStatisticsUserCount();
+        public  Map<String,Integer> getUserCount(){
+                Map<String,Integer> statisticsUserCount = new HashMap<>();
+                int responseUserCount = statisticsService.getSurveyRecordCount();
+                statisticsUserCount.put("responseUserCount",responseUserCount);
+                return statisticsUserCount;
         }
 }
