@@ -2,6 +2,7 @@ package com.bigo.whattypeofdev.domain.statistics.service;
 
 
 import com.bigo.whattypeofdev.domain.statistics.dto.*;
+import com.bigo.whattypeofdev.domain.statistics.repository.AnswerRepository;
 import com.bigo.whattypeofdev.domain.statistics.repository.StatisticGroupRepository;
 import com.bigo.whattypeofdev.domain.statistics.repository.SurveyRecordRepository;
 import com.bigo.whattypeofdev.global.entity.StatisticGroup;
@@ -20,6 +21,7 @@ public class StatisticsService {
 
     private final SurveyRecordRepository surveyRecordRepository;
     private final StatisticGroupRepository statisticGroupRepository;
+    private final AnswerRepository answerRepository;
 
     public StatisticsHeaderDto getStatisticsHeader(){
         int userCount = (int)surveyRecordRepository.count();
@@ -92,7 +94,21 @@ public class StatisticsService {
         return statisticsResultChartInfoDto;
     }
 
-//    public StatisticsResultChartInfoDto getStatisticswithFilter(String gender, String age) {
-//
-//    }
+    public StatisticsResultChartInfoDto getStatisticswithFilter(String gender, String age) {
+        int answerSeqGender=-1;
+        int answerSeqAge=-1;
+        if (!gender.equals("전체")) answerSeqGender = answerRepository.findByAnswer(gender).getAnswerSeq();
+        if(!age.equals("전체")) answerSeqAge = answerRepository.findByAnswer(age).getAnswerSeq();
+//        try {
+//            if (!gender.equals("전체")) answerSeqGender = answerRepository.findByAnswer(gender).getAnswerSeq();
+//        }catch(NullPointerException e){
+//            throw new NullPointerException("parameter가 잘못됨");
+//        }
+//        try{
+//            if(!age.equals("전체")) answerSeqGender = answerRepository.findByAnswer(gender).getAnswerSeq();
+//        }catch(NullPointerException e){
+//            throw new NullPointerException("");
+//        }
+        return  StatisticsResultChartInfoDto.converter(surveyRecordRepository.findAllTopByColumnWithFilter("aboutme_dev_type",answerSeqGender,answerSeqAge),surveyRecordRepository.findAllTopcountByColumnWithFilter("aboutme_dev_type",answerSeqGender,answerSeqAge),1);
+    }
 }

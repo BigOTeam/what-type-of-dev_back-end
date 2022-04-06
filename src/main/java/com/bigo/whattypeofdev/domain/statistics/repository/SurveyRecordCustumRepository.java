@@ -8,4 +8,6 @@ public interface SurveyRecordCustumRepository {
     List<String> findAllTopByColumn(String column);
     String findTopByColumn(String column);
     int countByColumn(String column);
+    List<Integer> findAllTopcountByColumnWithFilter(String column,int gender,int age);
+    List<String> findAllTopByColumnWithFilter(String column,int gender,int age);
 }

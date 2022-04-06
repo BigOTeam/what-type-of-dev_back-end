@@ -22,9 +22,9 @@ public class StatisticsController {
                 return statisticsResponseDto;
         }
 
-//        @GetMapping("statistics/filter")
-//        public StatisticsResultChartInfoDto StatisticswithFilter(@RequestParam(name="gender")String gender,@RequestParam(name="age")String age){
-//                return statisticsService.getStatisticswithFilter(gender,age);
-//        }
+        @GetMapping("statistics/filter")
+        public StatisticsResultChartInfoDto StatisticswithFilter(@RequestParam(name="gender")String gender,@RequestParam(name="age")String age){
+                return statisticsService.getStatisticswithFilter(gender,age);
+        }
 
 }
