@@ -2,7 +2,6 @@ package com.bigo.whattypeofdev.domain.statistics.controller;
 
 import com.bigo.whattypeofdev.domain.statistics.dto.StatisticsResponseDto;
 import com.bigo.whattypeofdev.domain.statistics.dto.StatisticsResultChartInfoDto;
-import com.bigo.whattypeofdev.domain.statistics.dto.StatisticsUserCountDto;
 import com.bigo.whattypeofdev.domain.statistics.service.StatisticsService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
