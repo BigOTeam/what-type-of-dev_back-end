@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -27,10 +28,12 @@ public class StatisticsService {
         int userCount = (int)surveyRecordRepository.count();
         //개발자 묻는 질문 답변 받기
         //답변 예 : 1 아니오 : 2
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+        String date = LocalDateTime.now().format(formatter);
         int careerCount = (int)surveyRecordRepository.countByAboutmeDev(1);
         return StatisticsHeaderDto
                 .builder()
-                .endDate(LocalDateTime.now())
+                .endDate(date)
                 .userCount(userCount)
                 .careerCount(careerCount)
                 .newCount(userCount-careerCount)
