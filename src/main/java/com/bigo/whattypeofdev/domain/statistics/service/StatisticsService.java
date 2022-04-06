@@ -24,8 +24,15 @@ public class StatisticsService {
     private final StatisticGroupRepository statisticGroupRepository;
     private final AnswerRepository answerRepository;
 
+    public int getUserCount(){
+        return (int)surveyRecordRepository.count();
+    }
+    public StatisticsUserCountDto getStatisticsUserCount(){
+        return getStatisticsUserCount().from(getUserCount());
+    }
+
     public StatisticsHeaderDto getStatisticsHeader(){
-        int userCount = (int)surveyRecordRepository.count();
+        int userCount = getUserCount();
         //개발자 묻는 질문 답변 받기
         //답변 예 : 1 아니오 : 2
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");

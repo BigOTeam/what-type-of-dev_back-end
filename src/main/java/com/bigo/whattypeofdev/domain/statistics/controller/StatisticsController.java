@@ -2,6 +2,7 @@ package com.bigo.whattypeofdev.domain.statistics.controller;
 
 import com.bigo.whattypeofdev.domain.statistics.dto.StatisticsResponseDto;
 import com.bigo.whattypeofdev.domain.statistics.dto.StatisticsResultChartInfoDto;
+import com.bigo.whattypeofdev.domain.statistics.dto.StatisticsUserCountDto;
 import com.bigo.whattypeofdev.domain.statistics.service.StatisticsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,14 +18,18 @@ public class StatisticsController {
         private final StatisticsService statisticsService;
 
         @GetMapping("statistics")
-        public StatisticsResponseDto Statistics(){
+        public StatisticsResponseDto getStatistics(){
                 StatisticsResponseDto statisticsResponseDto = statisticsService.getStatistics();
                 return statisticsResponseDto;
         }
 
         @GetMapping("statistics/filter")
-        public StatisticsResultChartInfoDto StatisticswithFilter(@RequestParam(name="gender")String gender,@RequestParam(name="age")String age){
+        public StatisticsResultChartInfoDto getStatisticswithFilter(@RequestParam(name="gender")String gender,@RequestParam(name="age")String age){
                 return statisticsService.getStatisticswithFilter(gender,age);
         }
 
+        @GetMapping("statistics/count")
+        public StatisticsUserCountDto getUserCount(){
+                return statisticsService.getStatisticsUserCount();
+        }
 }
