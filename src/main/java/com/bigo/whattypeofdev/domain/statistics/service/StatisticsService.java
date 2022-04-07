@@ -124,7 +124,7 @@ public class StatisticsService {
             throw new StatisticsParameterException("잘못된 필터값으로 요청을 반영할 수 없습니다.");
         }
 
-        return  StatisticsResultChartInfoDto.converter(surveyRecordRepository.findAllTopByColumnWithFilter("aboutme_dev_type",answerSeqGender,answerSeqAge),surveyRecordRepository.findAllTopcountByColumnWithFilter("aboutme_dev_type",answerSeqGender,answerSeqAge),1);
+        return  StatisticsResultChartInfoDto.converter(surveyRecordRepository.findAllByColumnWithFilter("aboutme_dev_type",answerSeqGender,answerSeqAge),surveyRecordRepository.findAllcountByColumnWithFilter("aboutme_dev_type",answerSeqGender,answerSeqAge),1);
 
     }
 }
