@@ -97,11 +97,11 @@ public class StatisticsService {
     public StatisticsResultChartInfoDto getChartInfo(Question question){
         String questionInitial = question.getQuestionInitial();
         StatisticsResultChartInfoDto statisticsResultChartInfoDto;
-//        if(question.getChartType().equals("doughnut")) {
+        if(question.getChartType().equals("doughnut")) {
             statisticsResultChartInfoDto = StatisticsResultChartInfoDto.converter(surveyRecordRepository.findAllTopByColumn(questionInitial), surveyRecordRepository.findAllTopcountByColumn(questionInitial), (int) surveyRecordRepository.count());
-//        }else{
-//            statisticsResultChartInfoDto = StatisticsResultChartInfoDto.converter(surveyRecordRepository.findAllByColumn(questionInitial),surveyRecordRepository.findAllCountByColumn(questionInitial),(int) surveyRecordRepository.count());
-//        }
+        }else{
+            statisticsResultChartInfoDto = StatisticsResultChartInfoDto.converter(surveyRecordRepository.findAllByColumn(questionInitial),surveyRecordRepository.findAllCountByColumn(questionInitial),(int) surveyRecordRepository.count());
+        }
         return statisticsResultChartInfoDto;
     }
 
