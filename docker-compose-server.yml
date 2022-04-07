@@ -69,6 +69,8 @@ services:
     volumes:
       - ./nginx_volumes/certbot/conf:/etc/letsencrypt
       - ./nginx_volumes/certbot/www:/var/www/certbot
+    networks:
+      - bigo_network
 
 networks:
   bigo_network:

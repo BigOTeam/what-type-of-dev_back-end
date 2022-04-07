@@ -10,6 +10,8 @@ jenkins_volumes/jenkins
 
 db_volumes/data
 
+nginx_volumes/certbot
+
 ### IntelliJ IDEA ###
 .idea
 *.iws
