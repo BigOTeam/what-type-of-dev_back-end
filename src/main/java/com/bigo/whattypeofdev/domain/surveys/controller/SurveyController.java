@@ -3,13 +3,18 @@ package com.bigo.whattypeofdev.domain.surveys.controller;
 import com.bigo.whattypeofdev.domain.surveys.dto.JobResponseDto;
 import com.bigo.whattypeofdev.domain.surveys.dto.JobListResponseDto;
 import com.bigo.whattypeofdev.domain.surveys.dto.SurveyResponseDto;
+import com.bigo.whattypeofdev.domain.surveys.exception.SurveyParameterException;
 import com.bigo.whattypeofdev.domain.surveys.service.SurveyService;
+import com.sun.istack.NotNull;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import lombok.RequiredArgsConstructor;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.HttpClientErrorException;
 
 @Api(value = "설문지 API", tags = {"Surveys"})
 @RestController
@@ -27,6 +32,9 @@ public class SurveyController {
             @ApiResponse(code = 500, message = "서버 오류")
     })
     public SurveyResponseDto getSurvey(@RequestParam("pageNo") Long pageNo,@RequestParam("isDeveloper") String isDeveloper){
+        if(pageNo==2&&isDeveloper==null){
+            throw new SurveyParameterException();
+        }
         SurveyResponseDto surveyResponseDto = surveyService.getSurveybyPageNo(pageNo,isDeveloper);
         return surveyResponseDto;
     }
@@ -48,7 +56,8 @@ public class SurveyController {
             @ApiResponse(code = 400, message = "파라미터에 해당하는 데이터를 찾을 수 없음"),
             @ApiResponse(code = 500, message = "서버 오류")
     })
-    public JobResponseDto getJobInfo(@PathVariable("job_id") Long jobId){
+    public JobResponseDto getJobInfo(@PathVariable("job_id") @NotNull() Long jobId)
+    {
         return surveyService.getJobInfo(jobId);
     }
 

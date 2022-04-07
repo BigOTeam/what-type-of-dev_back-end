@@ -4,13 +4,17 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 @Getter
-@AllArgsConstructor
 public class ErrorResponse {
-    private ErrorStatusEnum status;
+    private ErrorStatusEnum code;
     private String message;
 
-    public static ErrorResponse of(ErrorStatusEnum status, String message) {
-        return new ErrorResponse(status, message);
+    private ErrorResponse(ErrorStatusEnum code, String message) {
+        this.code = code;
+        this.message = message;
+    }
+
+    public static ErrorResponse of(ErrorStatusEnum code, String message) {
+        return new ErrorResponse(code, message);
     }
 
 }
