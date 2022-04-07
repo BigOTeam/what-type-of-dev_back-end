@@ -18,18 +18,18 @@ services:
     networks:
       - bigo_network
 
-  application:
-    build: .
-    restart: always
-    ports:
-      - '8081:8081'
-    depends_on:
-      - db
-    container_name: bigo_backend
-    environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/bigo_db?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Seoul&zeroDateTimeBehavior=convertToNull&rewriteBatchedStatements=true
-    networks:
-      - bigo_network
+#  application:
+#    build: .
+#    restart: always
+#    ports:
+#      - '8081:8081'
+#    depends_on:
+#      - db
+#    container_name: bigo_backend
+#    environment:
+#      SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/bigo_db?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Seoul&zeroDateTimeBehavior=convertToNull&rewriteBatchedStatements=true
+#    networks:
+#      - bigo_network
 
   jenkins:
     container_name: bigo_jenkins
