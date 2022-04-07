@@ -33,9 +33,11 @@ public class SurveyController {
             @ApiResponse(code = 500, message = "서버 오류")
     })
     public SurveyResponseDto getSurvey(@RequestParam("pageNo") Long pageNo,@RequestParam(value = "isDeveloper",required = false) String isDeveloper){
+
         if(pageNo==2&&isDeveloper==null){
             throw new SurveyParameterException();
         }
+
         SurveyResponseDto surveyResponseDto = surveyService.getSurveybyPageNo(pageNo,isDeveloper);
         return surveyResponseDto;
     }
@@ -57,6 +59,7 @@ public class SurveyController {
             @ApiResponse(code = 400, message = "파라미터에 해당하는 데이터를 찾을 수 없음"),
             @ApiResponse(code = 500, message = "서버 오류")
     })
+
     public JobResponseDto getJobInfo(@PathVariable("job_id")  Long jobId)
     {
         return surveyService.getJobInfo(jobId);
