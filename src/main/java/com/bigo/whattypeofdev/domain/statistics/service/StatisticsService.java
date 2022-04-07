@@ -1,7 +1,7 @@
 package com.bigo.whattypeofdev.domain.statistics.service;
 
 
-import com.bigo.whattypeofdev.domain.statistics.Exception.StatisticsParameterException;
+import com.bigo.whattypeofdev.domain.statistics.exception.StatisticsParameterException;
 import com.bigo.whattypeofdev.domain.statistics.dto.*;
 import com.bigo.whattypeofdev.domain.statistics.repository.AnswerRepository;
 import com.bigo.whattypeofdev.domain.statistics.repository.StatisticGroupRepository;

@@ -1,6 +1,6 @@
 package com.bigo.whattypeofdev.domain.statistics.controller;
 
-import com.bigo.whattypeofdev.domain.statistics.Exception.StatisticsParameterException;
+import com.bigo.whattypeofdev.domain.statistics.exception.StatisticsParameterException;
 import com.bigo.whattypeofdev.domain.statistics.dto.StatisticsResponseDto;
 import com.bigo.whattypeofdev.domain.statistics.dto.StatisticsResultChartInfoDto;
 import com.bigo.whattypeofdev.domain.statistics.service.StatisticsService;

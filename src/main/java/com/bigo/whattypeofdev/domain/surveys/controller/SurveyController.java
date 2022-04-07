@@ -31,10 +31,14 @@ public class SurveyController {
             @ApiResponse(code = 400, message = "파라미터에 해당하는 데이터를 찾을 수 없음"),
             @ApiResponse(code = 500, message = "서버 오류")
     })
+<<<<<<< HEAD
     public SurveyResponseDto getSurvey(@RequestParam("pageNo") Long pageNo,@RequestParam("isDeveloper") String isDeveloper){
         if(pageNo==2&&isDeveloper==null){
             throw new SurveyParameterException();
         }
+=======
+    public SurveyResponseDto getSurvey(@RequestParam("pageNo") Long pageNo,@RequestParam(value = "isDeveloper",required = false) String isDeveloper){
+>>>>>>> ceb9397aca8c012e5a1049f802fafe70b152d29d
         SurveyResponseDto surveyResponseDto = surveyService.getSurveybyPageNo(pageNo,isDeveloper);
         return surveyResponseDto;
     }
@@ -56,9 +60,13 @@ public class SurveyController {
             @ApiResponse(code = 400, message = "파라미터에 해당하는 데이터를 찾을 수 없음"),
             @ApiResponse(code = 500, message = "서버 오류")
     })
+<<<<<<< HEAD
     public JobResponseDto getJobInfo(@PathVariable("job_id") @NotNull() Long jobId)
     {
         return surveyService.getJobInfo(jobId);
+=======
+    public JobResponseDto getJobInfo(@PathVariable("job_id") Long jobId){ return surveyService.getJobInfo(jobId);
+>>>>>>> ceb9397aca8c012e5a1049f802fafe70b152d29d
     }
 
 }

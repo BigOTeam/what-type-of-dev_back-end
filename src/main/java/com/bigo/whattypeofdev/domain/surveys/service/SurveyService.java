@@ -29,7 +29,7 @@ public class SurveyService {
                                                             .answers(o.getQuestionAnswerList().stream().map(AnswerDto::fromEntity).collect(Collectors.toList()))
                                                             .build())
                                                     .collect(Collectors.toList());
-        if(pageNo==2&&!isDeveloper.equals("true")){
+        if(pageNo==2&&isDeveloper!=null&&!isDeveloper.equals("true")){
             surveyInfoDtos.remove(0);
         }
         return SurveyResponseDto.fromEntitywithSurveyInfoDto(page,surveyInfoDtos);
@@ -37,7 +37,7 @@ public class SurveyService {
 
     public JobListResponseDto getJobList(){
         List<JobDto> jobs = jobRepository.findAll().stream().map(JobDto::fromEntity).collect(Collectors.toList());
-        return new JobListResponseDto(jobs);
+        return JobListResponseDto.from(jobs);
     }
 
     public JobResponseDto getJobInfo(Long jobId) {
