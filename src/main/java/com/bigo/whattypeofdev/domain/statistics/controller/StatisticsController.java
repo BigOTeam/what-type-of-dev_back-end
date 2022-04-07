@@ -1,5 +1,6 @@
 package com.bigo.whattypeofdev.domain.statistics.controller;
 
+import com.bigo.whattypeofdev.domain.statistics.exception.StatisticsParameterException;
 import com.bigo.whattypeofdev.domain.statistics.dto.StatisticsResponseDto;
 import com.bigo.whattypeofdev.domain.statistics.dto.StatisticsResultChartInfoDto;
 import com.bigo.whattypeofdev.domain.statistics.service.StatisticsService;
@@ -44,6 +45,9 @@ public class StatisticsController {
                 @ApiResponse(code = 500, message = "서버 오류")
         })
         public StatisticsResultChartInfoDto getStatisticswithFilter(@RequestParam(name="gender")String gender,@RequestParam(name="age")String age){
+                if(gender.isEmpty() || age.isEmpty()){
+                        throw new StatisticsParameterException("필터 값이 비어있어 요청을 반영할 수 없습니다.");
+                }
                 return statisticsService.getStatisticswithFilter(gender,age);
         }
 

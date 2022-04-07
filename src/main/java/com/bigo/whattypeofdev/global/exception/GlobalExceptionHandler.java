@@ -31,8 +31,8 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(value = CustomException.class)
     public ResponseEntity customException(CustomException e) {
         ErrorStatusEnum errorStatusEnum = e.getErrorStatusEnum();
-        ErrorResponse errorResponse = ErrorResponse.of(e.getErrorStatusEnum(),e.getMessage());
-        return new ResponseEntity<>(errorResponse, HttpStatus.valueOf(errorStatusEnum.getCode()));
+        ErrorResponse errorResponse = ErrorResponse.of(errorStatusEnum,e.getMessage());
+        return new ResponseEntity<>(errorResponse, HttpStatus.valueOf(errorStatusEnum.getStatus()));
     }
 
 }

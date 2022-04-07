@@ -1,6 +1,7 @@
 package com.bigo.whattypeofdev.domain.statistics.service;
 
 
+import com.bigo.whattypeofdev.domain.statistics.exception.StatisticsParameterException;
 import com.bigo.whattypeofdev.domain.statistics.dto.*;
 import com.bigo.whattypeofdev.domain.statistics.repository.AnswerRepository;
 import com.bigo.whattypeofdev.domain.statistics.repository.StatisticGroupRepository;
@@ -33,6 +34,7 @@ public class StatisticsService {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
         String date = LocalDateTime.now().format(formatter);
         int careerCount = (int)surveyRecordRepository.countByAboutmeDev(1);
+
         return StatisticsHeaderDto
                 .builder()
                 .endDate(date)
@@ -73,6 +75,7 @@ public class StatisticsService {
             descriptionList.set(3,String.format(descriptionList.get(3),Integer.toString(percent)));
 
         }
+
         else if(statisticGroup.getStatisticName().equals("생활모습")){
             descriptionList.set(0,String.format(descriptionList.get(0),surveyRecordRepository.findTopByColumn("aboutme_work")));
             int iosPercent = surveyRecordRepository.countByAboutmeMobile(1)*100/surveyRecordRepository.countAll("aboutme_mobile");
@@ -84,8 +87,9 @@ public class StatisticsService {
                     +surveyRecordRepository.countByLifeGood(4)
             )*100/surveyRecordRepository.countAll("life_good");
             descriptionList.set(2,String.format(descriptionList.get(2),Integer.toString(percent)));
+
             List<String> top3 = surveyRecordRepository.findAllTopByColumn("dev_drink");
-            descriptionList.set(3,String.format(descriptionList.get(3),top3.get(0),top3.get(1),top3.get(2)));
+            descriptionList.set(3, String.format(descriptionList.get(3), top3.get(0), top3.get(1), top3.get(2)));
         }
         return descriptionList;
     }
@@ -108,8 +112,19 @@ public class StatisticsService {
     public StatisticsResultChartInfoDto getStatisticswithFilter(String gender, String age) {
         int answerSeqGender=-1;
         int answerSeqAge=-1;
-        if (!gender.equals("전체")) answerSeqGender = answerRepository.findByAnswer(gender).getAnswerSeq();
-        if(!age.equals("전체")) answerSeqAge = answerRepository.findByAnswer(age).getAnswerSeq();
-        return  StatisticsResultChartInfoDto.converter(surveyRecordRepository.findAllByColumnWithFilter("aboutme_dev_type",answerSeqGender,answerSeqAge),surveyRecordRepository.findAllcountByColumnWithFilter("aboutme_dev_type",answerSeqGender,answerSeqAge),1);
+
+        try {
+            if (!gender.equals("전체")) {
+                answerSeqGender = answerRepository.findByAnswer(gender).getAnswerSeq();
+            }
+            if (!age.equals("전체")) {
+                answerSeqAge = answerRepository.findByAnswer(age).getAnswerSeq();
+            }
+        }catch(NullPointerException n){
+            throw new StatisticsParameterException("잘못된 필터값으로 요청을 반영할 수 없습니다.");
+        }
+
+        return  StatisticsResultChartInfoDto.converter(surveyRecordRepository.findAllTopByColumnWithFilter("aboutme_dev_type",answerSeqGender,answerSeqAge),surveyRecordRepository.findAllTopcountByColumnWithFilter("aboutme_dev_type",answerSeqGender,answerSeqAge),1);
+
     }
 }
