@@ -5,6 +5,7 @@ import com.bigo.whattypeofdev.domain.statistics.dto.*;
 import com.bigo.whattypeofdev.domain.statistics.repository.AnswerRepository;
 import com.bigo.whattypeofdev.domain.statistics.repository.StatisticGroupRepository;
 import com.bigo.whattypeofdev.domain.statistics.repository.SurveyRecordRepository;
+import com.bigo.whattypeofdev.global.entity.Question;
 import com.bigo.whattypeofdev.global.entity.StatisticGroup;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -23,7 +24,6 @@ public class StatisticsService {
     private final SurveyRecordRepository surveyRecordRepository;
     private final StatisticGroupRepository statisticGroupRepository;
     private final AnswerRepository answerRepository;
-
     public int getSurveyRecordCount(){
         return (int)surveyRecordRepository.count();
     }
@@ -68,21 +68,21 @@ public class StatisticsService {
             int percent = (surveyRecordRepository.countByLifeJob(1)
                                             + surveyRecordRepository.countByLifeJob(2)
                                             + surveyRecordRepository.countByLifeJob(3))*100
-                                            / surveyRecordRepository.countByColumn("life_job");
+                                            / surveyRecordRepository.countAll("life_job");
 
             descriptionList.set(3,String.format(descriptionList.get(3),Integer.toString(percent)));
 
         }
         else if(statisticGroup.getStatisticName().equals("생활모습")){
             descriptionList.set(0,String.format(descriptionList.get(0),surveyRecordRepository.findTopByColumn("aboutme_work")));
-            int iosPercent = surveyRecordRepository.countByAboutmeMobile(1)*100/surveyRecordRepository.countByColumn("aboutme_mobile");
+            int iosPercent = surveyRecordRepository.countByAboutmeMobile(1)*100/surveyRecordRepository.countAll("aboutme_mobile");
             descriptionList.set(1,String.format(descriptionList.get(1),Integer.toString(iosPercent),Integer.toString(100-iosPercent)));
             int percent = (surveyRecordRepository.countByLifeGood(0)
                     +surveyRecordRepository.countByLifeGood(1)
                     +surveyRecordRepository.countByLifeGood(2)
                     +surveyRecordRepository.countByLifeGood(3)
                     +surveyRecordRepository.countByLifeGood(4)
-            )*100/surveyRecordRepository.countByColumn("life_good");
+            )*100/surveyRecordRepository.countAll("life_good");
             descriptionList.set(2,String.format(descriptionList.get(2),Integer.toString(percent)));
             List<String> top3 = surveyRecordRepository.findAllTopByColumn("dev_drink");
             descriptionList.set(3,String.format(descriptionList.get(3),top3.get(0),top3.get(1),top3.get(2)));
@@ -91,11 +91,17 @@ public class StatisticsService {
     }
 
     public List<StatisticsResultDto> getResult(StatisticGroup statisticGroup){
-        return statisticGroup.getQuestionList().stream().map(question -> StatisticsResultDto.converter(question,getChartInfo(question.getQuestionInitial()))).collect(Collectors.toList());
+        return statisticGroup.getQuestionList().stream().map(question -> StatisticsResultDto.converter(question,getChartInfo(question))).collect(Collectors.toList());
     }
 
-    public StatisticsResultChartInfoDto getChartInfo(String questionInitial){
-        StatisticsResultChartInfoDto statisticsResultChartInfoDto = StatisticsResultChartInfoDto.converter(surveyRecordRepository.findAllTopByColumn(questionInitial),surveyRecordRepository.findAllTopcountByColumn(questionInitial),(int)surveyRecordRepository.count());
+    public StatisticsResultChartInfoDto getChartInfo(Question question){
+        String questionInitial = question.getQuestionInitial();
+        StatisticsResultChartInfoDto statisticsResultChartInfoDto;
+        if(question.getChartType().equals("doughnut")) {
+            statisticsResultChartInfoDto = StatisticsResultChartInfoDto.converter(surveyRecordRepository.findAllTopByColumn(questionInitial), surveyRecordRepository.findAllTopcountByColumn(questionInitial), (int) surveyRecordRepository.count());
+        }else{
+            statisticsResultChartInfoDto = StatisticsResultChartInfoDto.converter(surveyRecordRepository.findAllByColumn(questionInitial),surveyRecordRepository.findAllCountByColumn(questionInitial),(int) surveyRecordRepository.count());
+        }
         return statisticsResultChartInfoDto;
     }
 
@@ -104,6 +110,6 @@ public class StatisticsService {
         int answerSeqAge=-1;
         if (!gender.equals("전체")) answerSeqGender = answerRepository.findByAnswer(gender).getAnswerSeq();
         if(!age.equals("전체")) answerSeqAge = answerRepository.findByAnswer(age).getAnswerSeq();
-        return  StatisticsResultChartInfoDto.converter(surveyRecordRepository.findAllTopByColumnWithFilter("aboutme_dev_type",answerSeqGender,answerSeqAge),surveyRecordRepository.findAllTopcountByColumnWithFilter("aboutme_dev_type",answerSeqGender,answerSeqAge),1);
+        return  StatisticsResultChartInfoDto.converter(surveyRecordRepository.findAllByColumnWithFilter("aboutme_dev_type",answerSeqGender,answerSeqAge),surveyRecordRepository.findAllcountByColumnWithFilter("aboutme_dev_type",answerSeqGender,answerSeqAge),1);
     }
 }
