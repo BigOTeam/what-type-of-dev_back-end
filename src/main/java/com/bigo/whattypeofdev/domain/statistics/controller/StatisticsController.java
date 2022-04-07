@@ -1,5 +1,6 @@
 package com.bigo.whattypeofdev.domain.statistics.controller;
 
+import com.bigo.whattypeofdev.domain.statistics.exception.StatisticsEmptyDataAccessException;
 import com.bigo.whattypeofdev.domain.statistics.exception.StatisticsParameterException;
 import com.bigo.whattypeofdev.domain.statistics.dto.StatisticsResponseDto;
 import com.bigo.whattypeofdev.domain.statistics.dto.StatisticsResultChartInfoDto;
@@ -9,6 +10,7 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import lombok.RequiredArgsConstructor;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -33,7 +35,12 @@ public class StatisticsController {
                 @ApiResponse(code = 500, message = "서버 오류")
         })
         public StatisticsResponseDto getStatistics(){
-                StatisticsResponseDto statisticsResponseDto = statisticsService.getStatistics();
+                StatisticsResponseDto statisticsResponseDto;
+                try{
+                        statisticsResponseDto = statisticsService.getStatistics();
+                }catch(EmptyResultDataAccessException e){
+                        throw new StatisticsEmptyDataAccessException();
+                }
                 return statisticsResponseDto;
         }
 
