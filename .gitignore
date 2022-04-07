@@ -7,10 +7,9 @@ build/
 bin/
 
 jenkins_volumes/jenkins
-
 db_volumes/data
-
 nginx_volumes/certbot
+.env
 
 ### IntelliJ IDEA ###
 .idea
