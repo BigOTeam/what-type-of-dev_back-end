@@ -6,9 +6,9 @@ import lombok.RequiredArgsConstructor;
 @Getter
 @RequiredArgsConstructor
 public enum Occupation {
-    Websites("Websites","웹개발자"),
+    Websites("Websites","웹 개발자"),
     Utilities("Utilities"," 유틸리티 개발자"),
-    Database("Database/Data Storage","DB엔지니어"),
+    Database("Database/Data Storage","DB 엔지니어"),
     SystemSoftware("SystemSoftware","OS 개발자"),
     ITInfrastructure("ITInfrastructure","인프라 엔지니어"),
     Finance("Finance","금융권 개발자"),
