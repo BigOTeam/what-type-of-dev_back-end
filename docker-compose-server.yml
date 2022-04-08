@@ -47,14 +47,28 @@ services:
 
   nginx:
     container_name: bigo_nginx
-    image: nginx
+    image: nginx:1.15-alpine
+    restart: always
     ports:
       - 80:80
+      - 443:443
     volumes:
       - ./nginx_volumes/nginx:/etc/nginx/conf.d/
       - ./nginx_volumes/log:/var/log/nginx
+      - ./nginx_volumes/certbot/conf:/etc/letsencrypt
+      - ./nginx_volumes/certbot/www:/var/www/certbot
     environment:
       TZ: Asia/Seoul
+    networks:
+      - bigo_network
+
+  certbot:
+    container_name: bigo_certbot
+    image: certbot/certbot:v0.36.0
+    restart: always
+    volumes:
+      - ./nginx_volumes/certbot/conf:/etc/letsencrypt
+      - ./nginx_volumes/certbot/www:/var/www/certbot
     networks:
       - bigo_network
 
