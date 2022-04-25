@@ -1,4 +1,4 @@
-FROM arm32v7/adoptopenjdk:8-jdk
+FROM arm32v7/adoptopenjdk:8-jre
 
 ENV APP_HOME=/usr/app/
 
